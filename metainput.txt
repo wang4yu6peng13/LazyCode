@@ -1,0 +1,31 @@
+// <0 namespace1 namespace2 path
+<0 amusementpark confbean 91_游乐园
+
+// <table_type TableName File [tablenumber] (table_type为1常量表、2配置表)
+// colName name type
+// table_type>
+
+// <enum Name (enum为3枚举)
+// number NAME str
+// enum>
+
+<1 AmusementParkConsts 游乐园常量表
+当前活动ID activity_id int
+1>
+<2 AmusementParkActivityCfg 游乐园活动配置表 910500
+活动ID activityCfgId int
+开关ID openId int
+描述 desc string
+2>
+
+<3 SubjectTypeEnum
+1 CLOWN 小丑
+2 KITE 风筝
+3 OTHER_TEST_1 测试1
+4 OTHER_TEST_2 测试2
+3>
+<2 AmusementParkKickOutRandomCfg 游乐园踢出地图随机表 2102
+地图ID mapCfgId int
+传出X toX int
+Y toY int
+2>
