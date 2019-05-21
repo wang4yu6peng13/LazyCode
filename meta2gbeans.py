@@ -2,10 +2,7 @@
 import os
 import re
 import sys
-
-PROJECT_DIR = "./"
-META_DIR = PROJECT_DIR+"meta/"
-GBEANS_DIR = PROJECT_DIR+"gbeans/"
+import datetime
 
 NAMESPACE1 = ""
 NAMESPACE2 = ""
@@ -14,16 +11,12 @@ SPACE4 = "    "
 
 
 def modify_file(file_name):
-    meta_dir = META_DIR+file_name
-    gbeans_dir = GBEANS_DIR+file_name
-    if os.path.isfile(gbeans_dir):
-        print(gbeans_dir, "已存在，不能覆盖")
-        os.system('pause')
-        return
-    with open(meta_dir, 'r', encoding='utf-8') as f1, open(gbeans_dir, "w", encoding="utf-8") as f2:
+    with open(file_name, 'r', encoding='utf-8') as f1, open(file_name+".xml", "a", encoding="utf-8") as f2:
+        f2.write(make_comment(True))
         for line in f1:
             line = deal_line(line)
             f2.write(line)
+        f2.write(make_comment(False))
 
 
 def deal_line(line):
@@ -104,6 +97,10 @@ def deal_variable_line(line):
         m = re.compile('type\\s*=\\s*".+?\..+?\..+?\..+?\..+"')
         line = re.sub(m, 'type="int"', line)
     return line
+
+
+def make_comment(is_start):
+    return '\n<!-- ===== %s %s ===== -->\n' % ('START' if is_start else ' END ', datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
 
 
 if __name__ == '__main__':
