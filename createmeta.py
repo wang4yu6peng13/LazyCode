@@ -110,7 +110,7 @@ def table_line(line):
     if STRUCTURE == StructureType.table:
         return '%s<variable colName="%s" name="%s" type="%s"%s/>\n' % (SPACE4*3, strings[0], strings[1], strings[2], ' local="true"' if strings[2] == 'string' else '')
     if STRUCTURE == StructureType.enum:
-        return '%s<case value="%s" name="%s" type="%s"/>\n' % (SPACE4*3, strings[0], strings[1].upper(), strings[2])
+        return '%s<case value="%s" name="%s" str="%s"/>\n' % (SPACE4*3, strings[0], strings[1].upper(), strings[2])
     return line
 
 
