@@ -5,6 +5,9 @@ import datetime
 import re
 
 
+SPACE4 = "    "
+
+
 def modify_file(file_name):
     with open(file_name, 'r', encoding='utf-8') as f1, open(file_name+".lua", "a", encoding="utf-8") as f2:
         f2.write(make_comment(True))
@@ -22,11 +25,18 @@ def deal_line(line):
 
 
 def get_info(line):
+    if '<protocol' in line:
+        m = re.search('name\\s*=\\s*"(.*?)"', line)
+        if m:
+            name = m.group(1)
+            return '%s = {\n' % (name)
+    if '</protocol>' in line:
+        return '},\n\n'
     m = re.search('<enum.*value=\"(.*?)\".*/>\\s*(.*)', line)
     if m:
         index = m.group(1)
         text = "未知！！！" if m.group(2) == "" else m.group(2)
-        return '[%s] = "%s",\n' % (index, text)
+        return '%s[%s] = "%s",\n' % (SPACE4, index, text)
     return ""
 
 
