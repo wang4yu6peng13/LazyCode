@@ -26,13 +26,13 @@ def deal_line(line):
 
 def get_info(line):
     if '<protocol' in line:
-        m = re.search('name\\s*=\\s*"(.*?)"', line)
+        m = re.search(r'name\s*=\s*"(.*?)"', line)
         if m:
             name = m.group(1)
             return '%s = {\n' % (name)
     if '</protocol>' in line:
         return '},\n\n'
-    m = re.search('<enum.*value=\"(.*?)\".*/>\\s*(.*)', line)
+    m = re.search(r'<enum.*value="(.*?)".*/>\s*(.*)', line)
     if m:
         index = m.group(1)
         text = "未知！！！" if m.group(2) == "" else m.group(2)

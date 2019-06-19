@@ -34,11 +34,11 @@ def get_namespaces(line):
     if "<namespace" in line:
         global NAMESPACE1, NAMESPACE2
         if NAMESPACE1 == "":
-            m = re.search('namespace\\s+name\\s*=\\s*\"(.*?)\"', line)
+            m = re.search(r'namespace\s+name\s*=\s*"(.*?)"', line)
             if m:
                 NAMESPACE1 = m.group(1)
         elif NAMESPACE1 != "" and NAMESPACE2 == "":
-            m = re.search('namespace\\s+name\\s*=\\s*\"(.*?)\"', line)
+            m = re.search(r'namespace\s+name\s*=\s*"(.*?)"', line)
             if m:
                 NAMESPACE2 = m.group(1)
 
@@ -51,11 +51,11 @@ def remove_line(line):
 
 def deal_table_line(line):
     if "<table" in line or "<const_table" in line:
-        m = re.search('file\\s*=\\s*\"(.*?)\"', line)
+        m = re.search(r'file\s*=\s*"(.*?)"', line)
         if m:
             xlsx_name = m.group(1)
             comments = '%s<!-- %s -->\n' % (SPACE4*2, xlsx_name)
-        m = re.search('name\\s*=\\s*\"(.*?)\"', line)
+        m = re.search(r'name\s*=\s*"(.*?)"', line)
         if m:
             name = m.group(1)
             line = comments + '%s<%stable export="" name="%s" from="mzm.gsp.%s.%s.%s">\n' % (
@@ -71,22 +71,22 @@ def deal_enum_line(line):
 
 def remove_tag(line):
     if "ref=" in line:
-        m = re.compile('\\s+ref\\s*=".*?"')
+        m = re.compile(r'\s+ref\s*=".*?"')
         line = re.sub(m, "", line)
     if "range=" in line:
-        m = re.compile('\\s+range\\s*=".*?"')
+        m = re.compile(r'\s+range\s*=".*?"')
         line = re.sub(m, "", line)
     if "canNull=" in line:
-        m = re.compile('\\s+canNull\\s*=".*?"')
+        m = re.compile(r'\s+canNull\s*=".*?"')
         line = re.sub(m, "", line)
     if "local=" in line:
-        m = re.compile('\\s+local\\s*=".*?"')
+        m = re.compile(r'\s+local\s*=".*?"')
         line = re.sub(m, "", line)
     if "global=" in line:
-        m = re.compile('\\s+global\\s*=".*?"')
+        m = re.compile(r'\s+global\s*=".*?"')
         line = re.sub(m, "", line)
     if "default=" in line:
-        m = re.compile('\\s+default\\s*=".*?"')
+        m = re.compile(r'\s+default\s*=".*?"')
         line = re.sub(m, "", line)
     return line
 
@@ -94,7 +94,7 @@ def remove_tag(line):
 def deal_variable_line(line):
     line = line.replace("colName", "desc")
     if "type=" in line:
-        m = re.compile('type\\s*=\\s*".+?\..+?\..+?\..+?\..+"')
+        m = re.compile(r'type\s*=\s*".+?\..+?\..+?\..+?\..+"')
         line = re.sub(m, 'type="int"', line)
     return line
 
