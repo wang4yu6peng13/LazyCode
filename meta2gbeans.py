@@ -33,13 +33,11 @@ def deal_line(line):
 def get_namespaces(line):
     if "<namespace" in line:
         global NAMESPACE1, NAMESPACE2
-        if NAMESPACE1 == "":
-            m = re.search(r'namespace\s+name\s*=\s*"(.*?)"', line)
-            if m:
+        m = re.search(r'namespace\s+name\s*=\s*"(.*?)"', line)
+        if m:
+            if NAMESPACE1 == "":
                 NAMESPACE1 = m.group(1)
-        elif NAMESPACE1 != "" and NAMESPACE2 == "":
-            m = re.search(r'namespace\s+name\s*=\s*"(.*?)"', line)
-            if m:
+            elif NAMESPACE1 != "" and NAMESPACE2 == "":
                 NAMESPACE2 = m.group(1)
 
 
