@@ -12,18 +12,18 @@ class StructureType(Enum):
     enum = 3
 
 
-NAMESPACE1 = ""
-NAMESPACE2 = ""
-PATH = ""
-STRUCTURE = StructureType.null
-
-
 SPACE4 = "    "
-TABLE_ID = '<key colName="模板ID" name="id" type="int" range="[%s,%s]"/>'
+TABLE_ID = '<key colName="模板ID" name="id" type="int" range="[%s,%s]" global="true"/>'
 TABLE_NAME = '<variable colName="模板名" name="templateName" type="string"/>'
 XML_HEAD = '<?xml version="1.0" encoding="utf-8" standalone="no"?>'
 XML_FOOT = '%s</namespace>\n</namespace>\n' % (SPACE4)
 ID_LEN = 9
+
+
+NAMESPACE1 = ""
+NAMESPACE2 = ""
+PATH = ""
+STRUCTURE = StructureType.null
 
 
 def modify_file(file_name):

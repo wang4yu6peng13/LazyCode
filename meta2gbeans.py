@@ -4,10 +4,10 @@ import re
 import sys
 import datetime
 
+SPACE4 = "    "
+
 NAMESPACE1 = ""
 NAMESPACE2 = ""
-
-SPACE4 = "    "
 
 
 def modify_file(file_name):
@@ -90,7 +90,6 @@ def remove_tag(line):
 
 
 def deal_variable_line(line):
-    line = line.replace("colName", "desc")
     if "type=" in line:
         m = re.compile(r'type\s*=\s*".+?\..+?\..+?\..+?\..+"')
         line = re.sub(m, 'type="int"', line)
